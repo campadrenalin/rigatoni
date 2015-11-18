@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rigatoni Tests</title>
+        <script src="/jquery-1.11.3.min.js"></script>
+        <script src="/rigatoni.js"></script>
+    </head>
+    <body>
+        The following is the template area.
+        <div id="test"></div>
+        <script>
+            function setUsername(el, d) { el.find('.username').text(d.username) }
+
+            templates = rigatoni.groove("", "/demo.tmpl");
+            templates.example = templates.groove('#example', [setUsername]);
+
+            templates.example('#test', { username: 'Fred' });
+        </script>
+    </body>
+</html>
