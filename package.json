@@ -1,0 +1,27 @@
+{
+  "name": "rigatoni",
+  "version": "0.0.1",
+  "description": "Template animation library",
+  "main": "rigatoni.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cat src/umd-start.js src/rigatoni.js src/umd-end.js > rigatoni.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/campadrenalin/rigatoni.git"
+  },
+  "keywords": [
+    "html",
+    "template",
+    "dom",
+    "manipulation",
+    "animation"
+  ],
+  "author": "Philip Horger <campadrenalin@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/campadrenalin/rigatoni/issues"
+  },
+  "homepage": "https://github.com/campadrenalin/rigatoni#readme"
+}
