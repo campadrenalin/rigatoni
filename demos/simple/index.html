@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Rigatoni Tests</title>
-        <script src="/jquery-1.11.3.min.js"></script>
+        <script src="/vendor/jquery-1.11.3.min.js"></script>
         <script src="/rigatoni.js"></script>
         <style>
             div#test {
@@ -38,7 +38,7 @@
                 });
             }
 
-            templates = rigatoni.groove("", "/demo.tmpl");
+            templates = rigatoni.groove("/simple/", "demo.tmpl");
             templates.static  = templates.groove('#static',  [setUsername, setCmntText, editButton]);
             templates.editing = templates.groove('#editing', []);
 
