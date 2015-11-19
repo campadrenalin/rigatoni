@@ -2,7 +2,7 @@ requirejs.config({
     baseUrl: '/require/',
     paths: {
         jquery:   '/vendor/jquery-1.11.3.min',
-        rigatoni: '/rigatoni',
+        rigatoni: '/build/rigatoni.min',
     }
 });
 
