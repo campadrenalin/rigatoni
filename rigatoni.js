@@ -2,6 +2,7 @@ var ax_settings = {
     'dataType': 'xml'
 };
 
+// Preserve promises indefinitely
 var _tmpl_cache = {}
 function get_tmpl(url) {
     if (!_tmpl_cache[url])
@@ -12,11 +13,23 @@ function get_tmpl(url) {
 function rigatoni(root, path, selector, transforms, element, data) {
     var url = root + path;
     return get_tmpl(url).done(function(html) {
-        var selected = $(html).find(selector).clone();
+        // Compute reused values
+        element = $(element);
+        var reset_url = url + "#" + selector,
+            noreset   = element.data('rigatoni-url') == reset_url,
+            selected  = noreset ? element : $(html).find(selector).clone();
+
+        // Apply transforms serially
         for (var i = 0; i < transforms.length; i++) {
             transforms[i](selected, data);
         }
-        $(element).html(selected);
+
+        // If edits were not in-place, apply them now.
+        // We use in-place editing when the structure has not changed since last boil.
+        if (noreset) return;
+        element
+            .html(selected.html() || 'no such pasta')
+            .data('rigatoni-url', reset_url);
     });
 }
 rigatoni._bound = [];

@@ -4,17 +4,46 @@
         <title>Rigatoni Tests</title>
         <script src="/jquery-1.11.3.min.js"></script>
         <script src="/rigatoni.js"></script>
+        <style>
+            div#test {
+                margin: 1em;
+                padding: 1em;
+                border: 1px solid red;
+            }
+            span.username {
+                font-weight: bold;
+            }
+            article {
+                display: block;
+                padding: .5em;
+                min-height: 2em;
+                left: auto;
+                right: auto;
+
+                background-color: pink;
+                font-family: sans;
+            }
+        </style>
     </head>
     <body>
         The following is the template area.
         <div id="test"></div>
         <script>
             function setUsername(el, d) { el.find('.username').text(d.username) }
+            function setCmntText(el, d) { el.find('article').text(d.comment) }
+            function editButton(el, d) {
+                var button = el.find('.edit');
+                button.on('click', function(){
+                    window.templates.editing("#test", persisted);
+                });
+            }
 
             templates = rigatoni.groove("", "/demo.tmpl");
-            templates.example = templates.groove('#example', [setUsername]);
+            templates.static  = templates.groove('#static',  [setUsername, setCmntText, editButton]);
+            templates.editing = templates.groove('#editing', []);
 
-            templates.example('#test', { username: 'Fred' });
+            persisted = { username: 'Fred', comment: 'Country && Western' };
+            templates.static('#test', persisted);
         </script>
     </body>
 </html>
