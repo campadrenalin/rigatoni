@@ -11,5 +11,5 @@
         root.rigatoni = factory(root.$);
     }
 }(this, function($) {
-    // Factory to produce rigatoni module, given deps as params.
+// Factory to produce rigatoni module, given deps as params.
 
