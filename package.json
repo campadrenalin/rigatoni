@@ -4,7 +4,7 @@
   "description": "Template animation library",
   "main": "rigatoni.js",
   "scripts": {
-    "lint": "jshint build/*.js",
+    "lint": "jshint build/rigatoni.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:umd": "cat src/umd-start.js src/rigatoni.js src/umd-end.js > build/rigatoni.js",
     "build:min": "uglifyjs build/rigatoni.js --lift-vars -mt -o build/rigatoni.min.js",

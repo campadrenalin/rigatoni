@@ -11,7 +11,7 @@ var _ax_settings = {
 
 // Cache for reusing the same template, never requesting twice in a
 // module lifetime (page lifetime in the browser).
-var _tmpl_cache = {}
+var _tmpl_cache = {};
 function get_tmpl(url) {
     if (!_tmpl_cache[url])
         _tmpl_cache[url] = $.ajax(url, _ax_settings);
@@ -77,14 +77,14 @@ rigatoni.groove = function() {
     var clone = function() {
         var inner_args = Array.prototype.slice.call(arguments);
         rigatoni.apply(rigatoni, outer_args.concat(inner_args));
-    }
+    };
 
     // Add attributes
     clone._bound = outer_args;
     clone.groove = rigatoni.groove;
 
     return clone;
-}
+};
 rigatoni._bound = [];
 
 // ================================================================================
