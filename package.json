@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:umd": "cat src/umd-start.js src/rigatoni.js src/umd-end.js > build/rigatoni.js",
     "build:min": "uglifyjs build/rigatoni.js --lift-vars -mt -o build/rigatoni.min.js",
-    "build": "npm run build:umd && npm run build:min"
+    "build": "npm run lint && npm run build:umd && npm run build:min"
   },
   "devDependencies": {
       "jshint": "latest",

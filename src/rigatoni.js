@@ -14,8 +14,15 @@ var _ax_settings = {
 var _tmpl_cache = {};
 function get_tmpl(url) {
     if (!_tmpl_cache[url])
-        _tmpl_cache[url] = $.ajax(url, _ax_settings);
+        _tmpl_cache[url] = $.ajax(url, _ax_settings).promise();
     return _tmpl_cache[url];
+}
+
+// Utility function to sanity check that a selector has exactly one element.
+// Currently a warning if it fails.
+function _check_one(el, stage) {
+    if (el.length === 1) return;
+    console.warn(stage + ': Expected 1 element, got ' + el.length);
 }
 
 // The main template function. Includes .groove() for partial binding.
@@ -34,6 +41,8 @@ function rigatoni(root, path, selector, transforms, element, data) {
         var reset_url = url + "#" + selector,
             noreset   = element.data('rigatoni-url') == reset_url,
             selected  = noreset ? element : $(html).find(selector).clone();
+        _check_one(selected, 'Selection from source');
+        _check_one(element, 'Elements to inject to');
 
         // Apply transforms serially
         for (var i = 0; i < transforms.length; i++) {
@@ -46,6 +55,9 @@ function rigatoni(root, path, selector, transforms, element, data) {
         element
             .html(selected.html() || 'no such pasta')
             .data('rigatoni-url', reset_url);
+    }).fail(function(jqXHR, textStatus, errorThrown){
+        console.error("Request failed for " + url);
+        console.error(errorThrown);
     });
 }
 
