@@ -88,7 +88,7 @@ rigatoni.groove = function() {
         Array.prototype.slice.call(arguments));
     var clone = function() {
         var inner_args = Array.prototype.slice.call(arguments);
-        rigatoni.apply(rigatoni, outer_args.concat(inner_args));
+        return rigatoni.apply(rigatoni, outer_args.concat(inner_args));
     };
 
     // Add attributes
