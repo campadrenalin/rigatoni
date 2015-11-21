@@ -10,7 +10,10 @@ define(['models', 'views'], function(models, views) {
             collection: app.models.boards
         });
         app.models.boards.add([
-            { title: 'Untitled Board' }
+            { title: 'Untitled Board' },
+            { title: 'Warriors' },
+            { title: 'Against' },
+            { title: 'The Settlers' }
         ]);
     });
 

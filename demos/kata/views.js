@@ -25,9 +25,30 @@ define(['views-core', 'backbone', 'models'], function(t, backbone, models) {
         render: renderer('#board-list', function(el, d) {
             el.empty();
             d.each(function(board) {
-                el.append('<a href="#">' + board.get('title') + '</a>');
+                var nav_view = new views.BoardListItem({ model: board });
+                el.append(nav_view.el);
             });
         })
+    });
+    views.BoardListItem = backbone.View.extend({
+        tagName: "a",
+        initialize: function() {
+            this.listenTo(this.model, "change", this.render);
+            this.render();
+        },
+        render: function() {
+            var stext = 'selected';
+            this.$el
+                .text(this.model.get('title'))
+                .attr('href', '#' + this.model.id);
+            this.$el.toggleClass(stext, this.model.get(stext));
+        },
+        events: {
+            click: "toggle"
+        },
+        toggle: function() {
+            this.model.set('selected', !this.model.get('selected'));
+        }
     });
 
     return views;

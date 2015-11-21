@@ -44,17 +44,19 @@ function rigatoni(root, path, selector, transforms, element, data) {
         _check_one(selected, 'Selection from source');
         _check_one(element, 'Elements to inject to');
 
+        // If edits were not in-place, apply them now.
+        // We use in-place editing when the structure has not changed since last boil.
+        if (!noreset) {
+            element
+                .html(selected.html() || 'no such pasta')
+                .data('rigatoni-url', reset_url);
+            selected = element;
+        }
+
         // Apply transforms serially
         for (var i = 0; i < transforms.length; i++) {
             transforms[i](selected, data);
         }
-
-        // If edits were not in-place, apply them now.
-        // We use in-place editing when the structure has not changed since last boil.
-        if (noreset) return;
-        element
-            .html(selected.html() || 'no such pasta')
-            .data('rigatoni-url', reset_url);
     }).fail(function(jqXHR, textStatus, errorThrown){
         console.error("Request failed for " + url);
         console.error(errorThrown);

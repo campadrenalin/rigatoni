@@ -28,7 +28,7 @@ body {
     border-top: 1px solid #555;
     border-bottom: 1px solid #AAA;
 
-    color: blue;
+    color: #153351;
     text-decoration: none;
     text-shadow: 2px 2px 10px #555;
 
@@ -36,7 +36,7 @@ body {
     transition-duration: 0.3s;
     transition-timing-function: ease-in-out;
 }
-#board-list a:hover { background-color: #A6E0E7; color: #153351; }
+#board-list a:hover { background-color: #A6E0E7; }
 #board-list a.selected { background-color: #153351; color: white; }
 
 article#board-area {

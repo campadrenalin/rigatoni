@@ -3,7 +3,8 @@ define(['backbone'], function(backbone) {
 
     models.Board = backbone.Model.extend({
         defaults: function(){ return {
-            title: "Untitled Board"
+            title: "Untitled Board",
+            selected: false
         }}
     });
 
