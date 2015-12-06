@@ -1,0 +1,3 @@
+define([
+    'routes/index'
+], function() {});
