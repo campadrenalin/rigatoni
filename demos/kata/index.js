@@ -1,5 +1,16 @@
 var http = require('http');
-var app  = require('./main-node');
+var requirejs = require('requirejs');
+
+requirejs.config({
+    baseUrl: __dirname,
+    nodeRequire: require,
+
+    paths: {
+        //rigatoni: '../build/rigatoni'
+    }
+});
+
+var app = requirejs('app');
 
 var server = http.createServer(function(request, response) {
     app.serve(request, response);
