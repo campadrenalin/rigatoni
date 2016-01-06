@@ -13,7 +13,7 @@ requirejs.config({
 var app = requirejs('app');
 
 var server = http.createServer(function(request, response) {
-    app.serve(request, response);
+    new app().serve(request, response);
 });
 
 var port = 8080;
