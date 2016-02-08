@@ -1,5 +1,4 @@
-Move new Rigatoni files into place
-Make sure everything still passes lint
+Fix build process and lint the results
 Write tests
 Fix existing demos
 Documentation

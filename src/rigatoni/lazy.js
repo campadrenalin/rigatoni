@@ -1,30 +1,44 @@
 define('rigatoni/lazy', ['underscore'], function(_) {
 
-    function Lazy(builders, initial_values) {
+    function LazyAttribute(compute_function, value) {
         var self = this;
-        self._cache    = _.extend({}, initial_values);
-        self._builders = _.extend({}, builders);
-
-        _.chain(self._builders).keys().each(function(key) {
-            self[key] = self._build_lazy_getter(key);
-        });
+        self.compute = compute_function;
+        self.value = value;
+        self.bound_accessor = function(value) { return self.accessor(value); };
+        self.bound_accessor.prototype = self;
     }
-    Lazy.prototype._build_lazy_getter = function(key) {
-        var self  = this,
-            cache = self._cache,
-            builder_callback = self._builders[key];
-        function getter(set_value) {
-            if (set_value !== undefined)
-                cache[key] = set_value;
-            if (!_.has(cache, key))
-                cache[key] = builder_callback.call(self);
-            return cache[key];
-        }
-        getter.rebuild = function() {
-            delete cache[key];
-            return getter();
+    LazyAttribute.prototype.get = function() {
+        if (!_.has(this, 'value'))
+            this.value = this.compute.call(this);
+        return this.value;
+    }
+    LazyAttribute.prototype.set = function(value) {
+        this.value = value;
+        return value;
+    }
+    LazyAttribute.prototype.rebuild = function() {
+        delete this.value;
+        return this.get();
+    }
+    LazyAttribute.prototype.accessor = function(value) {
+        return (value === undefined) ? this.get() : this.set(value);
+    }
+
+    function Lazy(builders, initial_values) {
+        this.extendAttributes(builders);
+        this.extendValues(initial_values);
+    }
+    Lazy.prototype.extendAttributes = function(builders) {
+        _.chain(builders || {}).keys().each(function(key) {
+            var attr = new LazyAttribute(builders[key]);
+            this[key] = attr.bound_accessor;
         };
-        return getter;
+    };
+    Lazy.prototype.extendCache = function(cache) {
+        _.chain(cache || {}).keys().each(function(key) {
+            if (!_.has(this, key)) return;
+            this[key].set(cache[key]);
+        };
     };
 
     return Lazy;
