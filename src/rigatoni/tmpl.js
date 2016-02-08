@@ -6,7 +6,7 @@ define('rigatoni/tmpl', ['underscore', 'cheerio'], function(_, cheerio) {
         transforms: [],
         data: {},
         base: '/',
-        loader: function() { throw "No template loader provided" }
+        loader: function() { throw "No template loader provided"; }
     };
 
     function template(params) {

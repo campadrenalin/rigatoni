@@ -2,17 +2,17 @@ define('rigatoni/page', ['rigatoni/lazy', 'underscore', 'rigatoni/tmpl'], functi
 
     function builtinLoader(path) {
         return '<html><b>' + path + ':</b> <i class="detail"></i></html>';
-    };
+    }
 
     var default_builders = {
-        url:        function() { return '/' },
-        statusCode: function() { return 200 },
-        handler: function() { throw "Override your page handler, please!" },
+        url:        function() { return '/'; },
+        statusCode: function() { return 200; },
+        handler: function() { throw "Override your page handler, please!"; },
         content: function() {
             try {
-                return this.handler()
+                return this.handler();
             } catch (e) {
-                return this.error(e)
+                return this.error(e);
             }
         },
         contentType: function() {
@@ -50,7 +50,7 @@ define('rigatoni/page', ['rigatoni/lazy', 'underscore', 'rigatoni/tmpl'], functi
         res.setHeader("Content-Type", this.contentType());
         res.statusCode = this.statusCode();
         res.end(this.structure());
-    }
+    };
 
     return Page;
 });

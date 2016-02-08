@@ -14,18 +14,18 @@ define('rigatoni/lazy', ['underscore'], function(_) {
             cache = self._cache,
             builder_callback = self._builders[key];
         function getter(set_value) {
-            if (set_value != undefined)
+            if (set_value !== undefined)
                 cache[key] = set_value;
             if (!_.has(cache, key))
-                cache[key] = builder_callback.call(self)
+                cache[key] = builder_callback.call(self);
             return cache[key];
         }
         getter.rebuild = function() {
             delete cache[key];
             return getter();
-        }
-        return getter
-    }
+        };
+        return getter;
+    };
 
     return Lazy;
 });
