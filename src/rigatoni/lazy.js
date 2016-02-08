@@ -1,4 +1,4 @@
-define(['underscore'], function(_) {
+define('rigatoni/lazy', ['underscore'], function(_) {
 
     function Lazy(builders, initial_values) {
         var self = this;

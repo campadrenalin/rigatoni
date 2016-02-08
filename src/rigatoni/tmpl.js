@@ -1,4 +1,4 @@
-define(['underscore', 'cheerio'], function(_, cheerio) {
+define('rigatoni/tmpl', ['underscore', 'cheerio'], function(_, cheerio) {
 
     var default_render_params = {
         src: '/',

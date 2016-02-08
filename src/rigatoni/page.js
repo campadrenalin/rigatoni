@@ -1,4 +1,4 @@
-define(['rigatoni/lazy', 'underscore', 'rigatoni/tmpl'], function(Lazy, _, tmpl) {
+define('rigatoni/page', ['rigatoni/lazy', 'underscore', 'rigatoni/tmpl'], function(Lazy, _, tmpl) {
 
     function builtinLoader(path) {
         return '<html><b>' + path + ':</b> <i class="detail"></i></html>';
