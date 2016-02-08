@@ -1,4 +1,4 @@
-Fix build process and lint the results
-Write tests
+! Fix build process and lint the results
+! Write tests
 Fix existing demos
 Documentation
