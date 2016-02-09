@@ -32,13 +32,13 @@ define('rigatoni/lazy', ['underscore'], function(_) {
         _.chain(builders || {}).keys().each(function(key) {
             var attr = new LazyAttribute(builders[key]);
             this[key] = attr.bound_accessor;
-        };
+        });
     };
     Lazy.prototype.extendCache = function(cache) {
         _.chain(cache || {}).keys().each(function(key) {
             if (!_.has(this, key)) return;
             this[key].set(cache[key]);
-        };
+        });
     };
 
     return Lazy;

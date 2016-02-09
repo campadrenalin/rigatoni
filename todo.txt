@@ -1,4 +1,6 @@
 ! Fix build process and lint the results
 ! Write tests
+Ergonomics/API problem - expects syncronous 'replace' operations where they cannot happen client-side.
+    Solve with promises?
 Fix existing demos
 Documentation
