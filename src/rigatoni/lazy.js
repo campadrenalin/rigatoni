@@ -11,18 +11,18 @@ define('rigatoni/lazy', ['underscore'], function(_) {
         if (!_.has(this, 'value'))
             this.value = this.compute.call(this);
         return this.value;
-    }
+    };
     LazyAttribute.prototype.set = function(value) {
         this.value = value;
         return value;
-    }
+    };
     LazyAttribute.prototype.rebuild = function() {
         delete this.value;
         return this.get();
-    }
+    };
     LazyAttribute.prototype.accessor = function(value) {
         return (value === undefined) ? this.get() : this.set(value);
-    }
+    };
 
     function Lazy(builders, initial_values) {
         this.extendAttributes(builders);

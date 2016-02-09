@@ -12,7 +12,7 @@ define('rigatoni/tmpl', ['underscore'], function(_) {
         this.jq     = jq;
         this.loader = loader;
         this.base   = _.isString(base) ? this.load(base) : base;
-    };
+    }
     Template.prototype.load = function(path) {
         return this.jq(this.loader(path));
     };
@@ -31,7 +31,7 @@ define('rigatoni/tmpl', ['underscore'], function(_) {
     };
     Template.prototype.render = function() {
         return this.base.html();
-    }
+    };
 
     return Template;
 });
