@@ -4,15 +4,21 @@
   "description": "Template animation library",
   "main": "rigatoni.js",
   "scripts": {
-    "lint": "jshint build/rigatoni.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "jshint src/rigatoni/*.js",
+    "test": "mocha",
     "build:umd": "cat src/umd-start.js src/rigatoni.js src/umd-end.js > build/rigatoni.js",
     "build:min": "uglifyjs build/rigatoni.js --lift-vars -mt -o build/rigatoni.min.js",
-    "build": "npm run build:umd && npm run build:min"
+    "build": "npm run lint && npm run build:umd && npm run build:min"
   },
   "devDependencies": {
       "jshint": "latest",
-      "uglify-js": "latest"
+      "uglify-js": "latest",
+      "requirejs": "latest",
+      "underscore": "latest",
+      "cheerio": "latest",
+      "mocha": "latest",
+      "chai": "latest",
+      "chai-http": "latest"
   },
   "repository": {
     "type": "git",
