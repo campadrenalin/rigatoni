@@ -5,10 +5,12 @@ define('rigatoni/lazy', ['underscore'], function(_) {
         self.compute = compute_function;
         self.value = value;
         self.bound_accessor = function(value) { return self.accessor(value); };
-        self.bound_accessor.prototype = self;
+        _.each(['get','set','recompute'], function(property) {
+            self.bound_accessor[property] = _.bind(LazyAttribute.prototype[property], self);
+        })
     }
     LazyAttribute.prototype.get = function() {
-        if (!_.has(this, 'value'))
+        if (!this.value)
             this.value = this.compute.call(this);
         return this.value;
     };
@@ -16,7 +18,7 @@ define('rigatoni/lazy', ['underscore'], function(_) {
         this.value = value;
         return value;
     };
-    LazyAttribute.prototype.rebuild = function() {
+    LazyAttribute.prototype.recompute = function() {
         delete this.value;
         return this.get();
     };
@@ -40,6 +42,7 @@ define('rigatoni/lazy', ['underscore'], function(_) {
             this[key].set(cache[key]);
         });
     };
+    Lazy.Attribute = LazyAttribute;
 
     return Lazy;
 });
